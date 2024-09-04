@@ -1,0 +1,62 @@
+﻿@page "/"
+@using System.Text
+@inherits IndexBack
+
+<h1 class="pt-8">Gerador de Senhas</h1>
+<MudText class="d-flex justify-left pb-8 pt-3">
+    Ferramenta online para gerar senhas fortes e seguras. O gerador de senhas permite criar uma senha aleatória com diversas opções.
+    Selecione as opções desejadas, clique em "Gerar Senha" e confira a senha gerada abaixo do botão.
+</MudText>
+
+<MudText>
+    1. Tamanho da Senha:
+</MudText>
+
+<MudItem xs="3">
+    <MudNumericField @bind-Value="intValueSize" Label="Enter an int" Variant="Variant.Outlined" />
+</MudItem>
+
+<MudStack Class="pb-8 pt-8">
+    <MudSwitch @bind-Value="_uppercase" Label="Incluir Letras Maiúsculas" Class="mud-width-full" Color="Color.Primary" />
+    <MudSwitch @bind-Value="_lowercase" Label="Incluir Letras Minúsculas" Class="mud-width-full" Color="Color.Primary" />
+    <MudSwitch @bind-Value="_number" Label="Incluir Números" Class="mud-width-full" Color="Color.Primary" />
+    <MudSwitch @bind-Value="_especial" Label="Incluir Caracteres Especiais" Class="mud-width-full" Color="Color.Primary" />
+</MudStack>
+
+<MudText>
+    2. Número de Senhas Geradas:
+</MudText>
+
+<MudItem xs="3">
+    <MudNumericField @bind-Value="intValueNumber" Label="Enter an int" Variant="Variant.Outlined" />
+</MudItem>
+
+<MudItem Class="d-flex justify-center pb-8 pt-3">
+    <MudFab Color=Color.Tertiary StartIcon="@Icons.Material.Filled.Refresh" @onclick="() => GetPasswords()" Label="GERAR SENHA" />
+</MudItem>
+
+<MudItem xs="3">
+   
+    @for (int i = 0; i < stringResult?.Count; i++)
+    {
+        <MudTextField T="string" Variant="Variant.Text" Text="@stringResult[i]" />
+    }
+    
+</MudItem>
+
+
+
+@code {
+    int intValueSize { get; set; } = 1;
+    int intValueNumber { get; set; } = 1;
+    bool _uppercase;
+    bool _lowercase;
+    bool _number;
+    bool _especial;
+    List<string>? stringResult { get; set; } = new();
+
+    void GetPasswords()
+    {
+        stringResult = IndexBack.GenerateRandomPassword(_uppercase, _lowercase, _number, _especial, intValueSize, intValueNumber);
+    }
+}

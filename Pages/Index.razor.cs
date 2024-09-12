@@ -18,97 +18,103 @@ public partial class IndexBack : ComponentBase
     {
         string? validChars = null;
 
-        if (_uppercase == true && _lowercase == false && _number == false && _especial == false)
+        try
         {
-            validChars = uppercase;
-        }
-        else if (_uppercase == false && _lowercase == true && _number == false && _especial == false)
-        {
-            validChars = lowercase;
-        }
-        else if (_uppercase == false && _lowercase == false && _number == true && _especial == false)
-        {
-            validChars = number;
-        }
-        else if (_uppercase == false && _lowercase == false && _number == false && _especial == true)
-        {
-            validChars = especial;
-        }
-        else if (_uppercase == true && _lowercase == true && _number == false && _especial == false)
-        {
-            validChars = uppercase + lowercase;
-        }
-        else if (_uppercase == true && _lowercase == false && _number == true && _especial == false)
-        {
-            validChars = uppercase + number;
-        }
-        else if (_uppercase == true && _lowercase == false && _number == false && _especial == true)
-        {
-            validChars = uppercase + especial;
-        }
-        else if (_uppercase == false && _lowercase == true && _number == true && _especial == false)
-        {
-            validChars = lowercase + number;
-        }
-        else if (_uppercase == false && _lowercase == true && _number == false && _especial == true)
-        {
-            validChars = lowercase + especial;
-        }
-        else if (_uppercase == false && _lowercase == false && _number == true && _especial == true)
-        {
-            validChars = number + especial;
-        }
-        else if (_uppercase == true && _lowercase == true && _number == true && _especial == false)
-        {
-            validChars = uppercase + lowercase + number;
-        }
-        else if (_uppercase == true && _lowercase == false && _number == true && _especial == true)
-        {
-            validChars = uppercase + number + especial;
-        }
-        else if (_uppercase == true && _lowercase == true && _number == false && _especial == true)
-        {
-            validChars = uppercase + lowercase + especial;
-        }
-        else if (_uppercase == false && _lowercase == true && _number == true && _especial == true)
-        {
-            validChars = lowercase + number + especial;
-        }
-        else if (_uppercase == true && _lowercase == true && _number == true && _especial == true)
-        {
-            validChars = uppercase + lowercase + number + especial;
-        }
-        else
-        {
-            validChars = null;
-        }
-        
-
-        Random random = new Random();
-
-        List<string> chars = new List<string>();
-
-        if(string.IsNullOrEmpty(validChars))
-        {
-            return null;
-        }
-        else
-        {
-            for (int j = 0; j < intValueNumber; j++)
+            if (_uppercase == true && _lowercase == false && _number == false && _especial == false)
             {
-                StringBuilder password = new StringBuilder();
+                validChars = uppercase;
+            }
+            else if (_uppercase == false && _lowercase == true && _number == false && _especial == false)
+            {
+                validChars = lowercase;
+            }
+            else if (_uppercase == false && _lowercase == false && _number == true && _especial == false)
+            {
+                validChars = number;
+            }
+            else if (_uppercase == false && _lowercase == false && _number == false && _especial == true)
+            {
+                validChars = especial;
+            }
+            else if (_uppercase == true && _lowercase == true && _number == false && _especial == false)
+            {
+                validChars = uppercase + lowercase;
+            }
+            else if (_uppercase == true && _lowercase == false && _number == true && _especial == false)
+            {
+                validChars = uppercase + number;
+            }
+            else if (_uppercase == true && _lowercase == false && _number == false && _especial == true)
+            {
+                validChars = uppercase + especial;
+            }
+            else if (_uppercase == false && _lowercase == true && _number == true && _especial == false)
+            {
+                validChars = lowercase + number;
+            }
+            else if (_uppercase == false && _lowercase == true && _number == false && _especial == true)
+            {
+                validChars = lowercase + especial;
+            }
+            else if (_uppercase == false && _lowercase == false && _number == true && _especial == true)
+            {
+                validChars = number + especial;
+            }
+            else if (_uppercase == true && _lowercase == true && _number == true && _especial == false)
+            {
+                validChars = uppercase + lowercase + number;
+            }
+            else if (_uppercase == true && _lowercase == false && _number == true && _especial == true)
+            {
+                validChars = uppercase + number + especial;
+            }
+            else if (_uppercase == true && _lowercase == true && _number == false && _especial == true)
+            {
+                validChars = uppercase + lowercase + especial;
+            }
+            else if (_uppercase == false && _lowercase == true && _number == true && _especial == true)
+            {
+                validChars = lowercase + number + especial;
+            }
+            else if (_uppercase == true && _lowercase == true && _number == true && _especial == true)
+            {
+                validChars = uppercase + lowercase + number + especial;
+            }
+            else
+            {
+                validChars = null;
+            }
 
-                for (int i = 0; i < intValueSize; i++)
+
+            Random random = new Random();
+
+            List<string> chars = new List<string>();
+
+            if (string.IsNullOrEmpty(validChars))
+            {
+                return null;
+            }
+            else
+            {
+                for (int j = 0; j < intValueNumber; j++)
                 {
-                    int index = random.Next(validChars.Length);
-                    password.Append(validChars[index]);
-                }              
-                chars.Add(password.ToString());
-            }             
+                    StringBuilder password = new StringBuilder();
 
-            return chars;
+                    for (int i = 0; i < intValueSize; i++)
+                    {
+                        int index = random.Next(validChars.Length);
+                        password.Append(validChars[index]);
+                    }
+                    chars.Add(password.ToString());
+                }
+
+                return chars;
+            }
         }
-        
+        catch
+        {
+            throw;
+        }
     }
 
     #endregion

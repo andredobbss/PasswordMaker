@@ -9,7 +9,7 @@
 </MudText>
 
 <MudText>
-    1. Tamanho da Senha:
+    <h3 class="pt-8">1. Tamanho da Senha:</h3>
 </MudText>
 
 <MudItem xs="3">
@@ -24,7 +24,7 @@
 </MudStack>
 
 <MudText>
-    2. Número de Senhas Geradas:
+    <h3 class="pt-8">2. Número de Senhas Geradas:</h3>
 </MudText>
 
 <MudItem xs="3">
@@ -36,12 +36,14 @@
 </MudItem>
 
 <MudItem xs="3">
-   
-    @for (int i = 0; i < stringResult?.Count; i++)
-    {
-        <MudTextField T="string" Variant="Variant.Text" Text="@stringResult[i]" />
-    }
-    
+    <MudTable Items="@stringResult.Take(intValueNumber)" Hover="true" Breakpoint="Breakpoint.Sm" LoadingProgressColor="Color.Primary">
+        <HeaderContent>
+            <MudTh>Password</MudTh>
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd DataLabel="Nr">@context</MudTd>
+        </RowTemplate>
+    </MudTable>
 </MudItem>
 
 
@@ -57,6 +59,19 @@
 
     void GetPasswords()
     {
-        stringResult = IndexBack.GenerateRandomPassword(_uppercase, _lowercase, _number, _especial, intValueSize, intValueNumber);
+        try
+        {
+            stringResult = IndexBack.GenerateRandomPassword(_uppercase,
+                                                            _lowercase,
+                                                            _number,
+                                                            _especial,
+                                                            intValueSize,
+                                                            intValueNumber);
+
+        }
+        catch
+        {
+            throw;
+        }
     }
 }
